@@ -1,0 +1,6 @@
+# Ignorar ambiente virtual de Python
+venv/
+env/
+ENV/
+.venv/
+.python-env/

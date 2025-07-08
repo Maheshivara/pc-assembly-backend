@@ -1,0 +1,216 @@
+// === Tabelas originais dos componentes ===
+
+Table CPUCooler {
+  name text [not null]
+  mpn text [pk]
+  ean text [not null]
+  upc text [not null]
+  brand text [not null]
+  sockets text [not null]
+  height integer [not null]
+  tdp integer [not null]
+  eightMm integer [not null]
+  nintyTwoMm integer [not null]
+  oneHundredTwentyMm integer [not null]
+  oneHundredFortyMm integer [not null]
+  twoHundredMm integer [not null]
+  adicionalFan boolean [not null]
+  imageUrl text [not null]
+  originalUrl text [not null]
+  productUrl text
+}
+
+Table CPU {
+  name text [not null]
+  mpn text [pk]
+  ean text [not null]
+  brand text [not null]
+  cores integer [not null]
+  threads integer [not null]
+  speed real [not null]
+  turboSpeed real
+  tdp integer [not null]
+  socket text [not null]
+  graphics text [not null]
+  imageUrl text [not null]
+  originalUrl text [not null]
+  productUrl text
+}
+
+Table GPU {
+  name text [not null]
+  mpn text [pk]
+  ean text [not null]
+  brand text [not null]
+  length integer [not null]
+  widthSlots real
+  eightPin integer [not null]
+  sixPin integer [not null]
+  hdmi integer [not null]
+  dp integer [not null]
+  dvi integer [not null]
+  vga integer [not null]
+  boostClockSpeed real
+  vram integer [not null]
+  memoryClockSpeed real [not null]
+  tdp integer [not null]
+  sync text [not null]
+  imageUrl text [not null]
+  originalUrl text [not null]
+  productUrl text
+}
+
+Table HD {
+  name text [not null]
+  mpn text [pk]
+  ean text [not null]
+  brand text [not null]
+  formFactor text [not null]
+  capacity integer [not null]
+  rpm integer [not null]
+  imageUrl text [not null]
+  originalUrl text [not null]
+  productUrl text
+}
+
+Table MemoriaRAM {
+  name text [not null]
+  mpn text [pk]
+  ean text [not null]
+  brand text [not null]
+  type text [not null]
+  capacity integer [not null]
+  clockSpeed integer [not null]
+  timings text [not null]
+  imageUrl text [not null]
+  originalUrl text [not null]
+  productUrl text
+}
+
+Table PlacaMae {
+  name text [not null]
+  brand text [not null]
+  mpn text [pk]
+  ean text [not null]
+  upc text [not null]
+  socket text [not null]
+  chipset text [not null]
+  formFactor text [not null]
+  memoryType text [not null]
+  memoryCapacity integer [not null]
+  memorySlots integer [not null]
+  memorySpeed text
+  sataSlots integer [not null]
+  m2PCI3Slots integer [not null]
+  m2PCI4Slots integer [not null]
+  extensionPCI3x1 integer [not null]
+  extensionPCI3x4 integer [not null]
+  extensionPCI3x8 integer [not null]
+  extensionPCI3x16 integer [not null]
+  extensionPCI4x1 integer [not null]
+  extensionPCI4x4 integer [not null]
+  extensionPCI4x8 integer [not null]
+  extensionPCI4x16 integer [not null]
+  usb3Slots integer [not null]
+  usb3Headers integer [not null]
+  usb3CSlots integer [not null]
+  vga integer [not null]
+  dvi integer [not null]
+  dp integer [not null]
+  hdmi integer [not null]
+  wifi text [not null]
+  graphics text [not null]
+  imageUrl text [not null]
+  originalUrl text [not null]
+  productUrl text
+}
+
+Table FonteDeAlimentacao {
+  name text [not null]
+  mpn text [pk]
+  ean text [not null]
+  brand text [not null]
+  power integer [not null]
+  efficiency text [not null]
+  type text [not null]
+  eightPin integer [not null]
+  sixPin integer [not null]
+  imageUrl text [not null]
+  originalUrl text [not null]
+  productUrl text
+}
+
+Table SSD {
+  name text [not null]
+  mpn text [pk]
+  ean text [not null]
+  brand text [not null]
+  formFactor text [not null]
+  protocol text [not null]
+  capacity integer [not null]
+  nandType text [not null]
+  controller text [not null]
+  imageUrl text [not null]
+  originalUrl text [not null]
+  productUrl text
+}
+
+//
+// === Tabelas de compatibilidade ===
+//
+
+Table Compat_PlaceMae_CPU {
+  id integer [pk, increment]
+  placaMae_mpn text [not null, ref: > PlacaMae.mpn]
+  cpu_mpn text [not null, ref: > CPU.mpn]
+}
+
+Table Compat_PlacaMae_MemoriaRAM {
+  id integer [pk, increment]
+  placaMae_mpn text [not null, ref: > PlacaMae.mpn]
+  ram_mpn text [not null, ref: > MemoriaRAM.mpn]
+}
+
+Table Compat_PlacaMae_GPU {
+  id integer [pk, increment]
+  placaMae_mpn text [not null, ref: > PlacaMae.mpn]
+  gpu_mpn text [not null, ref: > GPU.mpn]
+}
+
+Table Compat_CPUCooler_CPU {
+  id integer [pk, increment]
+  cooler_mpn text [not null, ref: > CPUCooler.mpn]
+  cpu_mpn text [not null, ref: > CPU.mpn]
+}
+
+Table Compat_GPU_Fonte {
+  id integer [pk, increment]
+  gpu_mpn text [not null, ref: > GPU.mpn]
+  fonte_mpn text [not null, ref: > FonteDeAlimentacao.mpn]
+}
+
+Table Compat_PlacaMae_SSD {
+  id integer [pk, increment]
+  placaMae_mpn text [not null, ref: > PlacaMae.mpn]
+  ssd_mpn text [not null, ref: > SSD.mpn]
+}
+
+Table Compat_PlacaMae_HD {
+  id integer [pk, increment]
+  placaMae_mpn text [not null, ref: > PlacaMae.mpn]
+  hd_mpn text [not null, ref: > HD.mpn]
+}
+
+Table Compat_PlacaMae_Fonte {
+  id integer [pk, increment]
+  placaMae_mpn text [not null, ref: > PlacaMae.mpn]
+  fonte_mpn text [not null, ref: > FonteDeAlimentacao.mpn]
+}
+
+//
+// === Relações diretas (automáticas por campo de referência) ===
+//
+
+Ref: "CPU"."socket" <> "PlacaMae"."socket"
+Ref: "CPUCooler"."sockets" <> "CPU"."socket"
+Ref: "PlacaMae"."memoryType" < "MemoriaRAM"."type"
