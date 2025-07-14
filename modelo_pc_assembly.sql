@@ -1,8 +1,8 @@
 CREATE SCHEMA IF NOT EXISTS desktop
-    AUTHORIZATION pg_database_owner;
+  AUTHORIZATION pg_database_owner;
 
 COMMENT ON SCHEMA desktop
-    IS 'standard public schema';
+  IS 'standard public schema';
 
 GRANT USAGE ON SCHEMA desktop TO postgres;
 
@@ -217,8 +217,18 @@ CREATE TABLE IF NOT EXISTS desktop."CPU_PlacaMae" (
   PRIMARY KEY ("CPU_socket", "PlacaMae_socket")
 );
 
-CREATE TABLE IF NOT EXISTS desktop."CPUCooler_CPU" (
-  "CPUCooler_sockets" text,
+ALTER TABLE desktop."CPU_PlacaMae" ADD FOREIGN KEY ("CPU_socket") REFERENCES desktop."CPU" ("socket");
+
+ALTER TABLE desktop."CPU_PlacaMae" ADD FOREIGN KEY ("PlacaMae_socket") REFERENCES desktop."PlacaMae" ("socket");
+
+CREATE TABLE IF NOT EXISTS desktop."CPU_CPUCooler" (
   "CPU_socket" text,
-  PRIMARY KEY ("CPUCooler_sockets", "CPU_socket")
+  "CPUCooler_sockets" text,
+  PRIMARY KEY ("CPU_socket", "CPUCooler_sockets")
 );
+
+ALTER TABLE desktop."CPU_CPUCooler" ADD FOREIGN KEY ("CPU_socket") REFERENCES desktop."CPU" ("socket");
+
+ALTER TABLE desktop."CPU_CPUCooler" ADD FOREIGN KEY ("CPUCooler_sockets") REFERENCES desktop."CPUCooler" ("sockets");
+
+ALTER TABLE desktop."MemoriaRAM" ADD FOREIGN KEY ("type") REFERENCES desktop."PlacaMae" ("memoryType");
