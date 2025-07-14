@@ -1,0 +1,15 @@
+services:
+  postgres:
+    image: postgres:17-alpine
+    container_name: pc_assembly_parts_db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: "843324"
+      POSTGRES_DB: pc_assembly
+    ports:
+      - "5432:5432"
+    volumes:
+      - pc_assembly_parts_data:/var/lib/postgresql/data
+
+volumes:
+  pc_assembly_parts_data:
