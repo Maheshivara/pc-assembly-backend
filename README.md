@@ -38,6 +38,14 @@ O notebook realiza:
 ### 5. Observações
 
 - Certifique-se de que o PostgreSQL está rodando e que as credenciais no notebook estão corretas.
+
+- Tenha o docker instalado e rode o seguinte comando.
+```sh
+docker compose up -d
+```
+
 - O arquivo de modelo SQL deve estar no caminho correto conforme especificado no notebook.
 
----
+### 6. Modelo do banco de dados
+
+- Para visualizar o modelo do banco de dados, o site [dbdiagram](https://dbdiagram.io/home) e adicione o texto do arquivo [modelo.txt](extras\modelo.txt)

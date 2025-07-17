@@ -9,226 +9,186 @@ GRANT USAGE ON SCHEMA desktop TO postgres;
 GRANT ALL ON SCHEMA desktop TO pg_database_owner;
 
 CREATE TABLE IF NOT EXISTS desktop."CPUCooler" (
-  "name" text NOT NULL,
+  "name" text,
   "mpn" text PRIMARY KEY,
-  "ean" text NOT NULL,
-  "upc" text NOT NULL,
-  "brand" text NOT NULL,
-  "sockets" text NOT NULL,
-  "height" integer NOT NULL,
-  "tdp" integer NOT NULL,
-  "eightMm" integer NOT NULL,
-  "nintyTwoMm" integer NOT NULL,
-  "oneHundredTwentyMm" integer NOT NULL,
-  "oneHundredFortyMm" integer NOT NULL,
-  "twoHundredMm" integer NOT NULL,
-  "adicionalFan" boolean NOT NULL,
-  "imageUrl" text NOT NULL,
-  "originalUrl" text NOT NULL,
+  "ean" text,
+  "upc" text,
+  "brand" text,
+  "sockets" text,
+  "height" integer,
+  "tdp" integer,
+  "eightMm" integer,
+  "nintyTwoMm" integer,
+  "oneHundredTwentyMm" integer,
+  "oneHundredFortyMm" integer,
+  "twoHundredMm" integer,
+  "adicionalFan" boolean,
+  "imageUrl" text,
+  "originalUrl" text,
   "productUrl" text
 );
 
 CREATE TABLE IF NOT EXISTS desktop."CPU" (
-  "name" text NOT NULL,
+  "name" text,
   "mpn" text PRIMARY KEY,
-  "ean" text NOT NULL,
-  "brand" text NOT NULL,
-  "cores" integer NOT NULL,
-  "threads" integer NOT NULL,
-  "speed" real NOT NULL,
+  "ean" text,
+  "brand" text,
+  "cores" integer,
+  "threads" integer,
+  "speed" real,
   "turboSpeed" real,
-  "tdp" integer NOT NULL,
-  "socket" text NOT NULL,
-  "graphics" text NOT NULL,
-  "imageUrl" text NOT NULL,
-  "originalUrl" text NOT NULL,
+  "tdp" integer,
+  "socket" text,
+  "graphics" text,
+  "imageUrl" text,
+  "originalUrl" text,
   "productUrl" text
 );
 
 CREATE TABLE IF NOT EXISTS desktop."GPU" (
-  "name" text NOT NULL,
+  "name" text,
   "mpn" text PRIMARY KEY,
-  "ean" text NOT NULL,
-  "brand" text NOT NULL,
-  "length" integer NOT NULL,
+  "ean" text,
+  "brand" text,
+  "length" integer,
   "widthSlots" real,
-  "eightPin" integer NOT NULL,
-  "sixPin" integer NOT NULL,
-  "hdmi" integer NOT NULL,
-  "dp" integer NOT NULL,
-  "dvi" integer NOT NULL,
-  "vga" integer NOT NULL,
+  "eightPin" integer,
+  "sixPin" integer,
+  "hdmi" integer,
+  "dp" integer,
+  "dvi" integer,
+  "vga" integer,
   "boostClockSpeed" real,
-  "vram" integer NOT NULL,
-  "memoryClockSpeed" real NOT NULL,
-  "tdp" integer NOT NULL,
-  "sync" text NOT NULL,
-  "imageUrl" text NOT NULL,
-  "originalUrl" text NOT NULL,
+  "vram" integer,
+  "memoryClockSpeed" real,
+  "tdp" integer,
+  "sync" text,
+  "imageUrl" text,
+  "originalUrl" text,
   "productUrl" text
 );
 
 CREATE TABLE IF NOT EXISTS desktop."HD" (
-  "name" text NOT NULL,
+  "name" text,
   "mpn" text PRIMARY KEY,
-  "ean" text NOT NULL,
-  "brand" text NOT NULL,
-  "formFactor" text NOT NULL,
-  "capacity" integer NOT NULL,
-  "rpm" integer NOT NULL,
-  "imageUrl" text NOT NULL,
-  "originalUrl" text NOT NULL,
+  "ean" text,
+  "brand" text,
+  "formFactor" text,
+  "capacity" integer,
+  "rpm" integer,
+  "imageUrl" text,
+  "originalUrl" text,
   "productUrl" text
 );
 
 CREATE TABLE IF NOT EXISTS desktop."MemoriaRAM" (
-  "name" text NOT NULL,
+  "name" text,
   "mpn" text PRIMARY KEY,
-  "ean" text NOT NULL,
-  "brand" text NOT NULL,
-  "type" text NOT NULL,
-  "capacity" integer NOT NULL,
-  "clockSpeed" integer NOT NULL,
-  "timings" text NOT NULL,
-  "imageUrl" text NOT NULL,
-  "originalUrl" text NOT NULL,
+  "ean" text,
+  "brand" text,
+  "type" text,
+  "capacity" integer,
+  "clockSpeed" integer,
+  "timings" text,
+  "imageUrl" text,
+  "originalUrl" text,
   "productUrl" text
 );
 
 CREATE TABLE IF NOT EXISTS desktop."PlacaMae" (
-  "name" text NOT NULL,
-  "brand" text NOT NULL,
+  "name" text,
+  "brand" text,
   "mpn" text PRIMARY KEY,
-  "ean" text NOT NULL,
-  "upc" text NOT NULL,
-  "socket" text NOT NULL,
-  "chipset" text NOT NULL,
-  "formFactor" text NOT NULL,
-  "memoryType" text NOT NULL,
-  "memoryCapacity" integer NOT NULL,
-  "memorySlots" integer NOT NULL,
+  "ean" text,
+  "upc" text,
+  "socket" text,
+  "chipset" text,
+  "formFactor" text,
+  "memoryType" text,
+  "memoryCapacity" integer,
+  "memorySlots" integer,
   "memorySpeed" text,
-  "sataSlots" integer NOT NULL,
-  "m2PCI3Slots" integer NOT NULL,
-  "m2PCI4Slots" integer NOT NULL,
-  "extensionPCI3x1" integer NOT NULL,
-  "extensionPCI3x4" integer NOT NULL,
-  "extensionPCI3x8" integer NOT NULL,
-  "extensionPCI3x16" integer NOT NULL,
-  "extensionPCI4x1" integer NOT NULL,
-  "extensionPCI4x4" integer NOT NULL,
-  "extensionPCI4x8" integer NOT NULL,
-  "extensionPCI4x16" integer NOT NULL,
-  "usb3Slots" integer NOT NULL,
-  "usb3Headers" integer NOT NULL,
-  "usb3CSlots" integer NOT NULL,
-  "vga" integer NOT NULL,
-  "dvi" integer NOT NULL,
-  "dp" integer NOT NULL,
-  "hdmi" integer NOT NULL,
-  "wifi" text NOT NULL,
-  "graphics" text NOT NULL,
-  "imageUrl" text NOT NULL,
-  "originalUrl" text NOT NULL,
+  "sataSlots" integer,
+  "m2PCI3Slots" integer,
+  "m2PCI4Slots" integer,
+  "extensionPCI3x1" integer,
+  "extensionPCI3x4" integer,
+  "extensionPCI3x8" integer,
+  "extensionPCI3x16" integer,
+  "extensionPCI4x1" integer,
+  "extensionPCI4x4" integer,
+  "extensionPCI4x8" integer,
+  "extensionPCI4x16" integer,
+  "usb3Slots" integer,
+  "usb3Headers" integer,
+  "usb3CSlots" integer,
+  "vga" integer,
+  "dvi" integer,
+  "dp" integer,
+  "hdmi" integer,
+  "wifi" text,
+  "graphics" text,
+  "imageUrl" text,
+  "originalUrl" text,
   "productUrl" text
 );
 
 CREATE TABLE IF NOT EXISTS desktop."FonteDeAlimentacao" (
-  "name" text NOT NULL,
+  "name" text,
   "mpn" text PRIMARY KEY,
-  "ean" text NOT NULL,
-  "brand" text NOT NULL,
-  "power" integer NOT NULL,
-  "efficiency" text NOT NULL,
-  "type" text NOT NULL,
-  "eightPin" integer NOT NULL,
-  "sixPin" integer NOT NULL,
-  "imageUrl" text NOT NULL,
-  "originalUrl" text NOT NULL,
+  "ean" text,
+  "brand" text,
+  "power" integer,
+  "efficiency" text,
+  "type" text,
+  "eightPin" integer,
+  "sixPin" integer,
+  "imageUrl" text,
+  "originalUrl" text,
   "productUrl" text
 );
 
 CREATE TABLE IF NOT EXISTS desktop."SSD" (
-  "name" text NOT NULL,
+  "name" text,
   "mpn" text PRIMARY KEY,
-  "ean" text NOT NULL,
-  "brand" text NOT NULL,
-  "formFactor" text NOT NULL,
-  "protocol" text NOT NULL,
-  "capacity" integer NOT NULL,
-  "nandType" text NOT NULL,
-  "controller" text NOT NULL,
-  "imageUrl" text NOT NULL,
-  "originalUrl" text NOT NULL,
+  "ean" text,
+  "brand" text,
+  "formFactor" text,
+  "protocol" text,
+  "capacity" integer,
+  "nandType" text,
+  "controller" text,
+  "imageUrl" text,
+  "originalUrl" text,
   "productUrl" text
 );
 
-CREATE TABLE IF NOT EXISTS desktop."Compat_PlaceMae_CPU" (
-  "id" INTEGER GENERATED BY DEFAULT AS IDENTITY PRIMARY KEY,
-  "placaMae_mpn" text NOT NULL,
-  "cpu_mpn" text NOT NULL
-);
-
-CREATE TABLE IF NOT EXISTS desktop."Compat_PlacaMae_MemoriaRAM" (
-  "id" INTEGER GENERATED BY DEFAULT AS IDENTITY PRIMARY KEY,
-  "placaMae_mpn" text NOT NULL,
-  "ram_mpn" text NOT NULL
-);
-
-CREATE TABLE IF NOT EXISTS desktop."Compat_PlacaMae_GPU" (
-  "id" INTEGER GENERATED BY DEFAULT AS IDENTITY PRIMARY KEY,
-  "placaMae_mpn" text NOT NULL,
-  "gpu_mpn" text NOT NULL
-);
-
-CREATE TABLE IF NOT EXISTS desktop."Compat_CPUCooler_CPU" (
-  "id" INTEGER GENERATED BY DEFAULT AS IDENTITY PRIMARY KEY,
-  "cooler_mpn" text NOT NULL,
-  "cpu_mpn" text NOT NULL
-);
-
-CREATE TABLE IF NOT EXISTS desktop."Compat_GPU_Fonte" (
-  "id" INTEGER GENERATED BY DEFAULT AS IDENTITY PRIMARY KEY,
-  "gpu_mpn" text NOT NULL,
-  "fonte_mpn" text NOT NULL
-);
-
-CREATE TABLE IF NOT EXISTS desktop."Compat_PlacaMae_SSD" (
-  "id" INTEGER GENERATED BY DEFAULT AS IDENTITY PRIMARY KEY,
-  "placaMae_mpn" text NOT NULL,
-  "ssd_mpn" text NOT NULL
-);
-
-CREATE TABLE IF NOT EXISTS desktop."Compat_PlacaMae_HD" (
-  "id" INTEGER GENERATED BY DEFAULT AS IDENTITY PRIMARY KEY,
-  "placaMae_mpn" text NOT NULL,
-  "hd_mpn" text NOT NULL
-);
-
-CREATE TABLE IF NOT EXISTS desktop."Compat_PlacaMae_Fonte" (
-  "id" INTEGER GENERATED BY DEFAULT AS IDENTITY PRIMARY KEY,
-  "placaMae_mpn" text NOT NULL,
-  "fonte_mpn" text NOT NULL
+CREATE TABLE IF NOT EXISTS desktop."CPU_Cooler" (
+  "cpu_mpn" text,
+  "cooler_mpn" text,
+  PRIMARY KEY ("cpu_mpn", "cooler_mpn")
 );
 
 CREATE TABLE IF NOT EXISTS desktop."CPU_PlacaMae" (
-  "CPU_socket" text,
-  "PlacaMae_socket" text,
-  PRIMARY KEY ("CPU_socket", "PlacaMae_socket")
+  "cpu_mpn" text,
+  "placamae_mpn" text,
+  PRIMARY KEY ("cpu_mpn", "placamae_mpn")
 );
 
-ALTER TABLE desktop."CPU_PlacaMae" ADD FOREIGN KEY ("CPU_socket") REFERENCES desktop."CPU" ("socket");
-
-ALTER TABLE desktop."CPU_PlacaMae" ADD FOREIGN KEY ("PlacaMae_socket") REFERENCES desktop."PlacaMae" ("socket");
-
-CREATE TABLE IF NOT EXISTS desktop."CPU_CPUCooler" (
-  "CPU_socket" text,
-  "CPUCooler_sockets" text,
-  PRIMARY KEY ("CPU_socket", "CPUCooler_sockets")
+CREATE TABLE IF NOT EXISTS desktop."PlacaMae_MemoriaRAM" (
+  "placamae_mpn" text,
+  "memoriaram_mpn" text,
+  PRIMARY KEY ("placamae_mpn", "memoriaram_mpn")
 );
 
-ALTER TABLE desktop."CPU_CPUCooler" ADD FOREIGN KEY ("CPU_socket") REFERENCES desktop."CPU" ("socket");
+ALTER TABLE desktop."CPU_Cooler" ADD FOREIGN KEY ("cpu_mpn") REFERENCES desktop."CPU" ("mpn");
 
-ALTER TABLE desktop."CPU_CPUCooler" ADD FOREIGN KEY ("CPUCooler_sockets") REFERENCES desktop."CPUCooler" ("sockets");
+ALTER TABLE desktop."CPU_Cooler" ADD FOREIGN KEY ("cooler_mpn") REFERENCES desktop."CPUCooler" ("mpn");
 
-ALTER TABLE desktop."MemoriaRAM" ADD FOREIGN KEY ("type") REFERENCES desktop."PlacaMae" ("memoryType");
+ALTER TABLE desktop."CPU_PlacaMae" ADD FOREIGN KEY ("cpu_mpn") REFERENCES desktop."CPU" ("mpn");
+
+ALTER TABLE desktop."CPU_PlacaMae" ADD FOREIGN KEY ("placamae_mpn") REFERENCES desktop."PlacaMae" ("mpn");
+
+ALTER TABLE desktop."PlacaMae_MemoriaRAM" ADD FOREIGN KEY ("placamae_mpn") REFERENCES desktop."PlacaMae" ("mpn");
+
+ALTER TABLE desktop."PlacaMae_MemoriaRAM" ADD FOREIGN KEY ("memoriaram_mpn") REFERENCES desktop."MemoriaRAM" ("mpn");
