@@ -11,7 +11,7 @@ import { Prisma } from 'generated/prisma';
 
 @Injectable()
 export class CoolerService {
-  constructor(private prisma: PrismaService) {}
+  constructor(private readonly prisma: PrismaService) {}
 
   async findMany(
     options: FilterOptionsCooler,
