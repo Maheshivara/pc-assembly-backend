@@ -1,5 +1,3 @@
-// === Tabelas originais dos componentes ===
-
 Table CPUCooler {
   name text [not null]
   mpn text [pk]
@@ -22,7 +20,7 @@ Table CPUCooler {
 
 Table CPU {
   name text [not null]
-  mpn text [pk]
+  mpn text [pk]               
   ean text [not null]
   brand text [not null]
   cores integer [not null]
@@ -30,7 +28,7 @@ Table CPU {
   speed real [not null]
   turboSpeed real
   tdp integer [not null]
-  socket text [not null]
+  socket text [not null]     
   graphics text [not null]
   imageUrl text [not null]
   originalUrl text [not null]
@@ -78,7 +76,7 @@ Table MemoriaRAM {
   mpn text [pk]
   ean text [not null]
   brand text [not null]
-  type text [not null]
+  type text [not null]        
   capacity integer [not null]
   clockSpeed integer [not null]
   timings text [not null]
@@ -93,10 +91,10 @@ Table PlacaMae {
   mpn text [pk]
   ean text [not null]
   upc text [not null]
-  socket text [not null]
+  socket text [not null]           
   chipset text [not null]
   formFactor text [not null]
-  memoryType text [not null]
+  memoryType text [not null]       
   memoryCapacity integer [not null]
   memorySlots integer [not null]
   memorySpeed text
@@ -155,62 +153,33 @@ Table SSD {
   productUrl text
 }
 
-//
-// === Tabelas de compatibilidade ===
-//
-
-Table Compat_PlaceMae_CPU {
-  id integer [pk, increment]
-  placaMae_mpn text [not null, ref: > PlacaMae.mpn]
+// Tabela de associação para CPU ↔ CPUCooler (N:M)
+Table CPU_Cooler {
   cpu_mpn text [not null, ref: > CPU.mpn]
-}
-
-Table Compat_PlacaMae_MemoriaRAM {
-  id integer [pk, increment]
-  placaMae_mpn text [not null, ref: > PlacaMae.mpn]
-  ram_mpn text [not null, ref: > MemoriaRAM.mpn]
-}
-
-Table Compat_PlacaMae_GPU {
-  id integer [pk, increment]
-  placaMae_mpn text [not null, ref: > PlacaMae.mpn]
-  gpu_mpn text [not null, ref: > GPU.mpn]
-}
-
-Table Compat_CPUCooler_CPU {
-  id integer [pk, increment]
   cooler_mpn text [not null, ref: > CPUCooler.mpn]
+  // PK composta
+  Indexes {
+    (cpu_mpn, cooler_mpn) [pk]
+  }
+}
+
+// Tabela de associação para CPU ↔ PlacaMae (N:M)
+Table CPU_PlacaMae {
   cpu_mpn text [not null, ref: > CPU.mpn]
+  placamae_mpn text [not null, ref: > PlacaMae.mpn]
+  // PK composta
+  Indexes {
+    (cpu_mpn, placamae_mpn) [pk]
+  }
 }
 
-Table Compat_GPU_Fonte {
-  id integer [pk, increment]
-  gpu_mpn text [not null, ref: > GPU.mpn]
-  fonte_mpn text [not null, ref: > FonteDeAlimentacao.mpn]
+// Tabela de associação para PlacaMae ↔ MemoriaRAM (N:M)
+Table PlacaMae_MemoriaRAM {
+  placamae_mpn text [not null, ref: > PlacaMae.mpn]
+  memoriaram_mpn text [not null, ref: > MemoriaRAM.mpn]
+  // PK composta
+  Indexes {
+    (placamae_mpn, memoriaram_mpn) [pk]
+  }
 }
 
-Table Compat_PlacaMae_SSD {
-  id integer [pk, increment]
-  placaMae_mpn text [not null, ref: > PlacaMae.mpn]
-  ssd_mpn text [not null, ref: > SSD.mpn]
-}
-
-Table Compat_PlacaMae_HD {
-  id integer [pk, increment]
-  placaMae_mpn text [not null, ref: > PlacaMae.mpn]
-  hd_mpn text [not null, ref: > HD.mpn]
-}
-
-Table Compat_PlacaMae_Fonte {
-  id integer [pk, increment]
-  placaMae_mpn text [not null, ref: > PlacaMae.mpn]
-  fonte_mpn text [not null, ref: > FonteDeAlimentacao.mpn]
-}
-
-//
-// === Relações diretas (automáticas por campo de referência) ===
-//
-
-Ref: "CPU"."socket" <> "PlacaMae"."socket"
-Ref: "CPUCooler"."sockets" <> "CPU"."socket"
-Ref: "PlacaMae"."memoryType" < "MemoriaRAM"."type"

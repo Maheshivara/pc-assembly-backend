@@ -1,0 +1,197 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model CPU {
+  name         String?
+  mpn          String         @id
+  ean          String?
+  brand        String?
+  cores        Int?
+  threads      Int?
+  speed        Float?         @db.Real
+  turboSpeed   Float?         @db.Real
+  tdp          Int?
+  socket       String?
+  graphics     String?
+  imageUrl     String?
+  originalUrl  String?
+  productUrl   String?
+  CPU_Cooler   CPU_Cooler[]
+  CPU_PlacaMae CPU_PlacaMae[]
+}
+
+model CPUCooler {
+  name               String?
+  mpn                String       @id
+  ean                String?
+  upc                String?
+  brand              String?
+  sockets            String?
+  height             Int?
+  tdp                Int?
+  eightMm            Int?
+  nintyTwoMm         Int?
+  oneHundredTwentyMm Int?
+  oneHundredFortyMm  Int?
+  twoHundredMm       Int?
+  adicionalFan       Boolean?
+  imageUrl           String?
+  originalUrl        String?
+  productUrl         String?
+  CPU_Cooler         CPU_Cooler[]
+}
+
+model CPU_Cooler {
+  cpu_mpn    String
+  cooler_mpn String
+  CPUCooler  CPUCooler @relation(fields: [cooler_mpn], references: [mpn], onDelete: NoAction, onUpdate: NoAction)
+  CPU        CPU       @relation(fields: [cpu_mpn], references: [mpn], onDelete: NoAction, onUpdate: NoAction)
+
+  @@id([cpu_mpn, cooler_mpn])
+}
+
+model CPU_PlacaMae {
+  cpu_mpn      String
+  placamae_mpn String
+  CPU          CPU      @relation(fields: [cpu_mpn], references: [mpn], onDelete: NoAction, onUpdate: NoAction)
+  PlacaMae     PlacaMae @relation(fields: [placamae_mpn], references: [mpn], onDelete: NoAction, onUpdate: NoAction)
+
+  @@id([cpu_mpn, placamae_mpn])
+}
+
+model FonteDeAlimentacao {
+  name        String?
+  mpn         String  @id
+  ean         String?
+  brand       String?
+  power       Int?
+  efficiency  String?
+  type        String?
+  eightPin    Int?
+  sixPin      Int?
+  imageUrl    String?
+  originalUrl String?
+  productUrl  String?
+}
+
+model GPU {
+  name             String?
+  mpn              String  @id
+  ean              String?
+  brand            String?
+  length           Int?
+  widthSlots       Float?  @db.Real
+  eightPin         Int?
+  sixPin           Int?
+  hdmi             Int?
+  dp               Int?
+  dvi              Int?
+  vga              Int?
+  boostClockSpeed  Float?  @db.Real
+  vram             Int?
+  memoryClockSpeed Float?  @db.Real
+  tdp              Int?
+  sync             String?
+  imageUrl         String?
+  originalUrl      String?
+  productUrl       String?
+}
+
+model HD {
+  name        String?
+  mpn         String  @id
+  ean         String?
+  brand       String?
+  formFactor  String?
+  capacity    Int?
+  rpm         Int?
+  imageUrl    String?
+  originalUrl String?
+  productUrl  String?
+}
+
+model MemoriaRAM {
+  name                String?
+  mpn                 String                @id
+  ean                 String?
+  brand               String?
+  type                String?
+  capacity            Int?
+  clockSpeed          Int?
+  timings             String?
+  imageUrl            String?
+  originalUrl         String?
+  productUrl          String?
+  PlacaMae_MemoriaRAM PlacaMae_MemoriaRAM[]
+}
+
+model PlacaMae {
+  name                String?
+  brand               String?
+  mpn                 String                @id
+  ean                 String?
+  upc                 String?
+  socket              String?
+  chipset             String?
+  formFactor          String?
+  memoryType          String?
+  memoryCapacity      Int?
+  memorySlots         Int?
+  memorySpeed         String?
+  sataSlots           Int?
+  m2PCI3Slots         Int?
+  m2PCI4Slots         Int?
+  extensionPCI3x1     Int?
+  extensionPCI3x4     Int?
+  extensionPCI3x8     Int?
+  extensionPCI3x16    Int?
+  extensionPCI4x1     Int?
+  extensionPCI4x4     Int?
+  extensionPCI4x8     Int?
+  extensionPCI4x16    Int?
+  usb3Slots           Int?
+  usb3Headers         Int?
+  usb3CSlots          Int?
+  vga                 Int?
+  dvi                 Int?
+  dp                  Int?
+  hdmi                Int?
+  wifi                String?
+  graphics            String?
+  imageUrl            String?
+  originalUrl         String?
+  productUrl          String?
+  CPU_PlacaMae        CPU_PlacaMae[]
+  PlacaMae_MemoriaRAM PlacaMae_MemoriaRAM[]
+}
+
+model PlacaMae_MemoriaRAM {
+  placamae_mpn   String
+  memoriaram_mpn String
+  MemoriaRAM     MemoriaRAM @relation(fields: [memoriaram_mpn], references: [mpn], onDelete: NoAction, onUpdate: NoAction)
+  PlacaMae       PlacaMae   @relation(fields: [placamae_mpn], references: [mpn], onDelete: NoAction, onUpdate: NoAction)
+
+  @@id([placamae_mpn, memoriaram_mpn])
+}
+
+model SSD {
+  name        String?
+  mpn         String  @id
+  ean         String?
+  brand       String?
+  formFactor  String?
+  protocol    String?
+  capacity    Int?
+  nandType    String?
+  controller  String?
+  imageUrl    String?
+  originalUrl String?
+  productUrl  String?
+}

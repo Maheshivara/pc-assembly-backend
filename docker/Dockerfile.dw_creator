@@ -1,0 +1,22 @@
+FROM python:3.11-alpine
+
+RUN apk add gcc python3-dev musl-dev linux-headers\
+  && rm -rf /var/cache/apk/* /tmp/*
+
+ADD https://astral.sh/uv/install.sh /uv-installer.sh
+RUN chmod +x /uv-installer.sh && \
+  /uv-installer.sh && \
+  rm -rf /uv-installer.sh
+
+ENV PATH="/root/.local/bin/:$PATH"
+
+WORKDIR /dw_creator
+
+COPY dw_creator/pyproject.toml /dw_creator/.python-version /dw_creator/uv.lock ./
+
+RUN uv sync --locked
+
+COPY dw_creator/data ./data
+COPY dw_creator/src ./src
+
+CMD ["uv", "run", "src/main.py"]

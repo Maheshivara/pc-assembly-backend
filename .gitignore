@@ -1,6 +1,23 @@
 # Ignorar ambiente virtual de Python
-venv/
-env/
-ENV/
-.venv/
-.python-env/
+dw_creator/.venv
+
+# Ignorar arquivos de cache do Python
+__pycache__/
+*.pyc
+
+# Ignorar modulos do Node.js
+node_modules
+
+# Ignorar arquivos do package manager
+.yarn
+
+# Ignorar arquivos gerados
+dist/
+build/
+generated/
+
+# Ignorar arquivos de log
+*.log
+
+# Ignorar arquivos de env
+.env
