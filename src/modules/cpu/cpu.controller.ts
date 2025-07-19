@@ -44,10 +44,6 @@ export class CpuController {
       },
     },
   })
-  @ApiNotFoundResponse({
-    type: NotFoundException,
-    description: 'No CPUs found matching the filter criteria.',
-  })
   @ApiInternalServerErrorResponse({
     type: InternalServerErrorException,
     description: 'Internal server error while fetching CPUs.',

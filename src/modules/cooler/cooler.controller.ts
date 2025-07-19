@@ -45,10 +45,6 @@ export class CoolerController {
       },
     },
   })
-  @ApiNotFoundResponse({
-    description: 'No coolers found matching the filter criteria.',
-    type: NotFoundException,
-  })
   @ApiInternalServerErrorResponse({
     description: 'Internal server error while fetching coolers.',
     type: InternalServerErrorException,
