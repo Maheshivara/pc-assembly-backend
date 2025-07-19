@@ -5,6 +5,7 @@ import { PsuModule } from './modules/psu/psu.module';
 import { GpuModule } from './modules/gpu/gpu.module';
 import { StorageModule } from './modules/storage/storage.module';
 import { MemoryModule } from './modules/memory/memory.module';
+import { MotherboardModule } from './modules/motherboard/motherboard.module';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { MemoryModule } from './modules/memory/memory.module';
     GpuModule,
     MemoryModule,
     StorageModule,
+    MotherboardModule,
   ],
   controllers: [],
   providers: [],

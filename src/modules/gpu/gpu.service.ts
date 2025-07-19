@@ -11,7 +11,7 @@ import { Prisma } from 'generated/prisma';
 
 @Injectable()
 export class GpuService {
-  constructor(private prisma: PrismaService) {}
+  constructor(private readonly prisma: PrismaService) {}
 
   async findMany(options: FilterGPUOptions): Promise<PagedEntity<GPU>> {
     try {

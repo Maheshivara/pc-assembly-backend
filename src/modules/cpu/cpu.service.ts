@@ -11,7 +11,7 @@ import { Prisma } from 'generated/prisma';
 
 @Injectable()
 export class CpuService {
-  constructor(private prisma: PrismaService) {}
+  constructor(private readonly prisma: PrismaService) {}
 
   async findMany(options: FilterOptionsCPU): Promise<PagedEntity<CPU>> {
     try {
