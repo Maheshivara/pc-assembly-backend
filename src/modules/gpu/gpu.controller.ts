@@ -44,9 +44,6 @@ export class GpuController {
       },
     },
   })
-  @ApiNotFoundResponse({
-    description: 'No GPUs found matching the filter criteria.',
-  })
   @ApiInternalServerErrorResponse({
     description: 'Internal server error.',
   })

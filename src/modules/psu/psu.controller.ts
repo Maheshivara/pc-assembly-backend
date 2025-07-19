@@ -44,10 +44,6 @@ export class PsuController {
       },
     },
   })
-  @ApiNotFoundResponse({
-    type: NotFoundException,
-    description: 'No PSUs found matching the filter criteria.',
-  })
   @ApiInternalServerErrorResponse({
     type: InternalServerErrorException,
     description: 'Internal server error while fetching PSUs.',
