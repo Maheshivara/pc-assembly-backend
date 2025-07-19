@@ -5,8 +5,8 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-
-  app.setGlobalPrefix('api');
+  const prefix = 'api';
+  app.setGlobalPrefix(prefix);
 
   const config = new DocumentBuilder()
     .setTitle('PC Assembly Parts API')
@@ -14,7 +14,7 @@ async function bootstrap() {
     .setVersion('1.0')
     .build();
   const documentFactory = () => SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('docs', app, documentFactory);
+  SwaggerModule.setup(`${prefix}/docs`, app, documentFactory);
 
   app.useGlobalPipes(new ValidationPipe({ transform: true }));
 
