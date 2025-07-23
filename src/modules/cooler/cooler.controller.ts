@@ -55,6 +55,7 @@ export class CoolerController {
     const opt = new FilterOptionsCooler(
       options.page,
       options.perPage,
+      options.cpuMpn,
       options.name,
     );
     return this.coolerService.findMany(opt);
