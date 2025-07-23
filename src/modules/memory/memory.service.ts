@@ -72,28 +72,23 @@ export class MemoryService {
     }
   }
   async findOne(mpn: string): Promise<Memory> {
-    try {
-      const memory = await this.prisma.memoriaRAM.findUnique({
-        where: { mpn },
-      });
-      if (!memory) {
-        throw new NotFoundException();
-      }
-      return new Memory(
-        memory.mpn,
-        memory.name || '',
-        memory.ean || '',
-        memory.brand || '',
-        memory.type || '',
-        memory.capacity || 0,
-        memory.clockSpeed || 0,
-        memory.timings || '',
-        memory.imageUrl || '',
-        memory.productUrl || '',
-      );
-    } catch (error) {
-      console.error('Error fetching memory:', error);
-      throw new InternalServerErrorException();
+    const memory = await this.prisma.memoriaRAM.findUnique({
+      where: { mpn },
+    });
+    if (!memory) {
+      throw new NotFoundException();
     }
+    return new Memory(
+      memory.mpn,
+      memory.name || '',
+      memory.ean || '',
+      memory.brand || '',
+      memory.type || '',
+      memory.capacity || 0,
+      memory.clockSpeed || 0,
+      memory.timings || '',
+      memory.imageUrl || '',
+      memory.productUrl || '',
+    );
   }
 }

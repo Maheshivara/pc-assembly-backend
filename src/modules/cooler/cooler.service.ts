@@ -38,15 +38,22 @@ export class CoolerService {
           : {}),
       };
 
-      const total = await this.prisma.cPU_Cooler.count({
+      const coolersGroup = await this.prisma.cPU_Cooler.groupBy({
+        by: ['cooler_mpn'],
         where: whereConditions,
+        _count: true,
       });
 
-      if (total === 0 || options.skip() >= total) {
+      if (coolersGroup.length === 0 || options.skip() >= coolersGroup.length) {
         return new PagedEntity<CPUCooler>([], 0, options.perPage, options.page);
       }
+      const coolersMpns = coolersGroup.map((item) => item.cooler_mpn);
       const list = await this.prisma.cPU_Cooler.findMany({
-        where: whereConditions,
+        where: {
+          cooler_mpn: {
+            in: coolersMpns,
+          },
+        },
         orderBy: {
           CPUCooler: { name: 'asc' },
         },
@@ -55,7 +62,7 @@ export class CoolerService {
         include: {
           CPUCooler: true,
         },
-        distinct: ['cpu_mpn'],
+        distinct: ['cooler_mpn'],
       });
 
       const items = list.map((item) => {
@@ -80,7 +87,7 @@ export class CoolerService {
       });
       return new PagedEntity<CPUCooler>(
         items,
-        total,
+        coolersGroup.length,
         options.perPage,
         options.page,
       );
@@ -91,36 +98,31 @@ export class CoolerService {
   }
 
   async findOne(mpn: string): Promise<CPUCooler> {
-    try {
-      const cooler = await this.prisma.cPUCooler.findUnique({
-        where: { mpn: mpn },
-      });
+    const cooler = await this.prisma.cPUCooler.findUnique({
+      where: { mpn: mpn },
+    });
 
-      if (!cooler) {
-        throw new NotFoundException();
-      }
-
-      return new CPUCooler(
-        cooler.mpn,
-        cooler.name || '',
-        cooler.ean || '',
-        cooler.upc || '',
-        cooler.brand || '',
-        cooler.sockets || '',
-        cooler.height || 0,
-        cooler.tdp || 0,
-        cooler.eightMm || 0,
-        cooler.nintyTwoMm || 0,
-        cooler.oneHundredTwentyMm || 0,
-        cooler.oneHundredFortyMm || 0,
-        cooler.twoHundredMm || 0,
-        cooler.adicionalFan || false,
-        cooler.imageUrl || '',
-        cooler.productUrl || '',
-      );
-    } catch (error) {
-      console.error('Error fetching CPU Cooler:', error);
-      throw new InternalServerErrorException('Failed to fetch CPU Cooler');
+    if (!cooler) {
+      throw new NotFoundException();
     }
+
+    return new CPUCooler(
+      cooler.mpn,
+      cooler.name || '',
+      cooler.ean || '',
+      cooler.upc || '',
+      cooler.brand || '',
+      cooler.sockets || '',
+      cooler.height || 0,
+      cooler.tdp || 0,
+      cooler.eightMm || 0,
+      cooler.nintyTwoMm || 0,
+      cooler.oneHundredTwentyMm || 0,
+      cooler.oneHundredFortyMm || 0,
+      cooler.twoHundredMm || 0,
+      cooler.adicionalFan || false,
+      cooler.imageUrl || '',
+      cooler.productUrl || '',
+    );
   }
 }
