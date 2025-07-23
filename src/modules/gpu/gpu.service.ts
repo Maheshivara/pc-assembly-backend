@@ -71,37 +71,32 @@ export class GpuService {
   }
 
   async findOne(mpn: string): Promise<GPU> {
-    try {
-      const gpu = await this.prisma.gPU.findUnique({
-        where: { mpn },
-      });
-      if (!gpu) {
-        throw new NotFoundException();
-      }
-      return new GPU(
-        gpu.mpn,
-        gpu.name || '',
-        gpu.ean || '',
-        gpu.brand || '',
-        gpu.length || 0,
-        gpu.widthSlots || 0,
-        gpu.eightPin || 0,
-        gpu.sixPin || 0,
-        gpu.hdmi || 0,
-        gpu.dp || 0,
-        gpu.dvi || 0,
-        gpu.vga || 0,
-        gpu.boostClockSpeed || 0,
-        gpu.vram || 0,
-        gpu.memoryClockSpeed || 0,
-        gpu.tdp || 0,
-        gpu.sync || '',
-        gpu.imageUrl || '',
-        gpu.productUrl || '',
-      );
-    } catch (error) {
-      console.error('Error fetching GPU:', error);
-      throw new InternalServerErrorException('Error fetching GPU');
+    const gpu = await this.prisma.gPU.findUnique({
+      where: { mpn },
+    });
+    if (!gpu) {
+      throw new NotFoundException();
     }
+    return new GPU(
+      gpu.mpn,
+      gpu.name || '',
+      gpu.ean || '',
+      gpu.brand || '',
+      gpu.length || 0,
+      gpu.widthSlots || 0,
+      gpu.eightPin || 0,
+      gpu.sixPin || 0,
+      gpu.hdmi || 0,
+      gpu.dp || 0,
+      gpu.dvi || 0,
+      gpu.vga || 0,
+      gpu.boostClockSpeed || 0,
+      gpu.vram || 0,
+      gpu.memoryClockSpeed || 0,
+      gpu.tdp || 0,
+      gpu.sync || '',
+      gpu.imageUrl || '',
+      gpu.productUrl || '',
+    );
   }
 }

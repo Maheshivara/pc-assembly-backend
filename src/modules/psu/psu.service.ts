@@ -69,31 +69,26 @@ export class PsuService {
   }
 
   async findOne(mpn: string): Promise<PSU> {
-    try {
-      const psu = await this.prisma.fonteDeAlimentacao.findUnique({
-        where: { mpn },
-      });
+    const psu = await this.prisma.fonteDeAlimentacao.findUnique({
+      where: { mpn },
+    });
 
-      if (!psu) {
-        throw new NotFoundException();
-      }
-
-      return new PSU(
-        psu.mpn,
-        psu.name || '',
-        psu.ean || '',
-        psu.brand || '',
-        psu.power || 0,
-        psu.efficiency || '',
-        psu.type || '',
-        psu.eightPin || 0,
-        psu.sixPin || 0,
-        psu.imageUrl || '',
-        psu.productUrl || '',
-      );
-    } catch (error) {
-      console.error('Error fetching PSU:', error);
-      throw new InternalServerErrorException('Failed to fetch PSU');
+    if (!psu) {
+      throw new NotFoundException();
     }
+
+    return new PSU(
+      psu.mpn,
+      psu.name || '',
+      psu.ean || '',
+      psu.brand || '',
+      psu.power || 0,
+      psu.efficiency || '',
+      psu.type || '',
+      psu.eightPin || 0,
+      psu.sixPin || 0,
+      psu.imageUrl || '',
+      psu.productUrl || '',
+    );
   }
 }

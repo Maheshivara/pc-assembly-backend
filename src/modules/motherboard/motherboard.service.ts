@@ -112,54 +112,49 @@ export class MotherboardService {
   }
 
   async findOne(mpn: string): Promise<Motherboard> {
-    try {
-      const motherboard = await this.prismaService.placaMae.findUnique({
-        where: { mpn },
-      });
+    const motherboard = await this.prismaService.placaMae.findUnique({
+      where: { mpn },
+    });
 
-      if (!motherboard) {
-        throw new NotFoundException();
-      }
-
-      return new Motherboard(
-        motherboard.mpn,
-        motherboard.name || '',
-        motherboard.brand || '',
-        motherboard.ean || '',
-        motherboard.upc || '',
-        motherboard.socket || '',
-        motherboard.chipset || '',
-        motherboard.formFactor || '',
-        motherboard.memoryType || '',
-        motherboard.memoryCapacity || 0,
-        motherboard.memorySlots || 0,
-        motherboard.memorySpeed || '',
-        motherboard.sataSlots || 0,
-        motherboard.m2PCI3Slots || 0,
-        motherboard.m2PCI4Slots || 0,
-        motherboard.extensionPCI3x1 || 0,
-        motherboard.extensionPCI3x4 || 0,
-        motherboard.extensionPCI3x8 || 0,
-        motherboard.extensionPCI3x16 || 0,
-        motherboard.extensionPCI4x1 || 0,
-        motherboard.extensionPCI4x4 || 0,
-        motherboard.extensionPCI4x8 || 0,
-        motherboard.extensionPCI4x16 || 0,
-        motherboard.usb3Slots || 0,
-        motherboard.usb3Headers || 0,
-        motherboard.usb3CSlots || 0,
-        motherboard.vga || 0,
-        motherboard.dvi || 0,
-        motherboard.dp || 0,
-        motherboard.hdmi || 0,
-        motherboard.wifi || '',
-        motherboard.graphics || '',
-        motherboard.imageUrl || '',
-        motherboard.productUrl || '',
-      );
-    } catch (error) {
-      console.error('Error fetching the motherboard:', error);
-      throw new InternalServerErrorException();
+    if (!motherboard) {
+      throw new NotFoundException();
     }
+
+    return new Motherboard(
+      motherboard.mpn,
+      motherboard.name || '',
+      motherboard.brand || '',
+      motherboard.ean || '',
+      motherboard.upc || '',
+      motherboard.socket || '',
+      motherboard.chipset || '',
+      motherboard.formFactor || '',
+      motherboard.memoryType || '',
+      motherboard.memoryCapacity || 0,
+      motherboard.memorySlots || 0,
+      motherboard.memorySpeed || '',
+      motherboard.sataSlots || 0,
+      motherboard.m2PCI3Slots || 0,
+      motherboard.m2PCI4Slots || 0,
+      motherboard.extensionPCI3x1 || 0,
+      motherboard.extensionPCI3x4 || 0,
+      motherboard.extensionPCI3x8 || 0,
+      motherboard.extensionPCI3x16 || 0,
+      motherboard.extensionPCI4x1 || 0,
+      motherboard.extensionPCI4x4 || 0,
+      motherboard.extensionPCI4x8 || 0,
+      motherboard.extensionPCI4x16 || 0,
+      motherboard.usb3Slots || 0,
+      motherboard.usb3Headers || 0,
+      motherboard.usb3CSlots || 0,
+      motherboard.vga || 0,
+      motherboard.dvi || 0,
+      motherboard.dp || 0,
+      motherboard.hdmi || 0,
+      motherboard.wifi || '',
+      motherboard.graphics || '',
+      motherboard.imageUrl || '',
+      motherboard.productUrl || '',
+    );
   }
 }

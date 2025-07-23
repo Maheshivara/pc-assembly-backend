@@ -67,31 +67,26 @@ export class CpuService {
   }
 
   async findOne(mpn: string): Promise<CPU> {
-    try {
-      const cpu = await this.prisma.cPU.findUnique({
-        where: { mpn },
-      });
-      if (!cpu) {
-        throw new NotFoundException();
-      }
-      return new CPU(
-        cpu.mpn,
-        cpu.name || '',
-        cpu.ean || '',
-        cpu.brand || '',
-        cpu.cores || 0,
-        cpu.threads || 0,
-        cpu.speed || 0,
-        cpu.turboSpeed || 0,
-        cpu.tdp || 0,
-        cpu.socket || '',
-        cpu.graphics || '',
-        cpu.imageUrl || '',
-        cpu.productUrl || '',
-      );
-    } catch (error) {
-      console.error('Error fetching CPU:', error);
-      throw new InternalServerErrorException('Failed to fetch CPU');
+    const cpu = await this.prisma.cPU.findUnique({
+      where: { mpn },
+    });
+    if (!cpu) {
+      throw new NotFoundException();
     }
+    return new CPU(
+      cpu.mpn,
+      cpu.name || '',
+      cpu.ean || '',
+      cpu.brand || '',
+      cpu.cores || 0,
+      cpu.threads || 0,
+      cpu.speed || 0,
+      cpu.turboSpeed || 0,
+      cpu.tdp || 0,
+      cpu.socket || '',
+      cpu.graphics || '',
+      cpu.imageUrl || '',
+      cpu.productUrl || '',
+    );
   }
 }

@@ -191,23 +191,18 @@ export class StorageService {
   }
 
   async findOne(mpn: string): Promise<Storage> {
-    try {
-      const storage = await this.prismaService.$queryRaw<Storage>(
-        Prisma.sql`SELECT mpn, name, ean, UPPER("formFactor") as "formFactor", "brand", "imageUrl", "productUrl", 'HDD' as type, 'SATA' as protocol, capacity*1000 as capacity FROM "HD"
+    const storage = await this.prismaService.$queryRaw<Storage>(
+      Prisma.sql`SELECT mpn, name, ean, UPPER("formFactor") as "formFactor", "brand", "imageUrl", "productUrl", 'HDD' as type, 'SATA' as protocol, capacity*1000 as capacity FROM "HD"
             WHERE mpn = ${mpn}
             UNION ALL
             SELECT mpn, name, ean, UPPER("formFactor") as "formFactor", "brand", "imageUrl", "productUrl", 'SSD' as type, protocol, capacity FROM "SSD"
             WHERE mpn = ${mpn}
           LIMIT 1
       `,
-      );
-      if (!storage) {
-        throw new NotFoundException();
-      }
-      return storage;
-    } catch (error) {
-      console.error('Error finding storage by MPN:', error);
-      throw new InternalServerErrorException();
+    );
+    if (!storage) {
+      throw new NotFoundException();
     }
+    return storage;
   }
 }
