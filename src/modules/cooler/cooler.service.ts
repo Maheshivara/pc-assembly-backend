@@ -67,7 +67,7 @@ export class CoolerService {
 
       const items = list.map((item) => {
         return new CPUCooler(
-          item.cpu_mpn,
+          item.cooler_mpn,
           item.CPUCooler.name || '',
           item.CPUCooler.ean || '',
           item.CPUCooler.upc || '',

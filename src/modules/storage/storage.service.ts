@@ -191,7 +191,7 @@ export class StorageService {
   }
 
   async findOne(mpn: string): Promise<Storage> {
-    const storage = await this.prismaService.$queryRaw<Storage>(
+    const storage = await this.prismaService.$queryRaw<Storage[]>(
       Prisma.sql`SELECT mpn, name, ean, UPPER("formFactor") as "formFactor", "brand", "imageUrl", "productUrl", 'HDD' as type, 'SATA' as protocol, capacity*1000 as capacity FROM "HD"
             WHERE mpn = ${mpn}
             UNION ALL
@@ -203,6 +203,6 @@ export class StorageService {
     if (!storage) {
       throw new NotFoundException();
     }
-    return storage;
+    return storage[0];
   }
 }
